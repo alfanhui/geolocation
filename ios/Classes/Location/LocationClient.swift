@@ -67,7 +67,7 @@ class LocationClient : NSObject, CLLocationManagerDelegate {
   }
   
   func removeLocationUpdates(requestId: Int) {
-    guard let index = locationUpdatesRequests.index(where: { $0.id == requestId }) else {
+    guard let index = locationUpdatesRequests.firstIndex(where: { $0.id == requestId }) else {
       return
     }
     
