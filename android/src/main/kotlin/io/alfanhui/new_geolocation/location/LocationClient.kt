@@ -201,19 +201,6 @@ class LocationClient(private val activity: Activity) {
                 return@launch
             }
 
-            val hasCurrentRequest = locationUpdatesRequests.any { it.strategy == LocationUpdatesRequest.Strategy.Current }
-            if (hasCurrentRequest) {
-                val lastLocationResult = lastLocationIfAvailable()
-                if (lastLocationResult != null) {
-                    onLocationUpdatesResult(lastLocationResult)
-
-                    val hasOnlyCurrentRequest = locationUpdatesRequests.all { it.strategy == LocationUpdatesRequest.Strategy.Current }
-                    if (hasOnlyCurrentRequest) {
-                        return@launch
-                    }
-                }
-            }
-
             val locationRequest = LocationRequest.create()
 
             locationRequest.priority = locationUpdatesRequests.map { it.accuracy.androidValue }
